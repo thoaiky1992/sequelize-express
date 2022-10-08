@@ -1,0 +1,73 @@
+version: "3.8"
+services:
+  #Postgres
+  postgres:
+    container_name: "postgres"
+    image: "postgres"
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: "${DB_NAME}"
+      POSTGRES_USER: "${DB_USER}"
+      POSTGRES_PASSWORD: "${DB_PASS}"
+    volumes:
+      - postgres:/data/postgres
+    env_file:
+      - .env
+    networks:
+      - app-network
+    ports:
+      - "${DB_PORT}:${DB_PORT}"
+  # #Adminer
+  adminer:
+    image: adminer
+    container_name: adminer
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    ports:
+      - 9080:8080
+    networks:
+      - app-network
+
+  #PgAdmin
+  # pgadmin:
+  #   container_name: pgadmin
+  #   image: dpage/pgadmin4
+  #   environment:
+  #     PGADMIN_DEFAULT_EMAIL: "${PG_ADMIN_EMAIL}"
+  #     PGADMIN_DEFAULT_PASSWORD: "${PG_ADMIN_PASSWORD}"
+  #   env_file:
+  #     - .env
+  #   tty: true
+  #   depends_on:
+  #     - postgres
+  #   ports:
+  #     - "9000:80"
+  #   networks:
+  #     - other-network
+  #   restart: always
+  #Redis
+  # redis:
+  #   image: redis:6.2-alpine
+  #   container_name: redis
+  #   restart: always
+  #   tty: true
+  #   ports:
+  #     - "6379:6379"
+  #   command: redis-server --save 60 1 --loglevel warning --requirepass thoaiky1992
+  #   volumes:
+  #     - ./cache-redis:/data
+  #   networks:
+  #     - app-network
+
+#Networks
+networks:
+  app-network:
+    name: app-network
+    driver: bridge
+volumes:
+  postgres:
+# networks:
+#   app-network:
+#     external:
+#       name: app-network
