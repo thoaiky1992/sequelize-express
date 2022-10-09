@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { User } from "../models/connect-db";
+import { User } from "../models";
 import { GenerateToken, VerifyToken } from "../utils/token";
 import { HttpException } from "./error.middleware";
 

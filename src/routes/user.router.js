@@ -6,8 +6,6 @@ import { UserValidation } from "../validation/user.validation";
 
 const userRouter = Router();
 
-userRouter
-  .get("/", UserController.getMany)
-  .post("/", ValidationMiddleware(UserValidation.create), UserController.createOne);
+userRouter.get("/", UserController.getMany).post("/", UserController.createOne);
 
 export default userRouter;

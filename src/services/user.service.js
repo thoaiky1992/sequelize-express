@@ -1,7 +1,6 @@
 import { LIMIT } from "../contants";
 import { Op, literal, fn } from "sequelize";
-import { User } from "../models/user.model";
-import { Post } from "../models/post.model";
+import { Post, User } from "../models";
 
 const getMany = async (req, res) => {
   const page = Number(req.query.page) || 1;
