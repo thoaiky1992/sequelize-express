@@ -1,8 +1,8 @@
 "use strict";
 
-import { DB_SCHEMA } from "../contants";
-import bcryptjs from "bcryptjs";
+import { DB_SCHEMA, DEFAULT_AVATAR, HASH_SALT } from "../contants";
 const { Model } = require("sequelize");
+import bcryptjs from "bcryptjs";
 
 export const UserModel = (sequelize, DataTypes) => {
   class User extends Model {
@@ -24,13 +24,17 @@ export const UserModel = (sequelize, DataTypes) => {
       email: {
         type: DataTypes.STRING,
       },
+      avatar: {
+        type: DataTypes.STRING,
+        defaultValue: DEFAULT_AVATAR,
+      },
       password: {
         type: DataTypes.STRING,
-        get() {
-          return this.userName;
-        },
+        // get() {
+        //   return this.userName;
+        // },
         set(value) {
-          this.setDataValue("password", value);
+          this.setDataValue("password", bcryptjs.hashSync(value, HASH_SALT));
         },
       },
     },

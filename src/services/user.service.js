@@ -1,7 +1,9 @@
 import { LIMIT } from "../contants";
-import { Op, literal, fn } from "sequelize";
+import { Op, fn } from "sequelize";
 import { Post, User } from "../models";
+import { UploadFile } from "../utils/upload-file";
 
+// eslint-disable-next-line no-unused-vars
 const getMany = async (req, res) => {
   const page = Number(req.query.page) || 1;
   const offset = (page - 1) * LIMIT;
@@ -15,9 +17,17 @@ const getMany = async (req, res) => {
   return users;
 };
 
+// eslint-disable-next-line no-unused-vars
 const createOne = async (req, res) => {
-  const user = await User.create(req.body);
-  return { user };
+  const payload = Object.assign({}, req.body);
+  const files = req.files;
+  if (files && files.length) {
+    const filePaths = UploadFile(files[0], "/images/avatars", new Date().getTime() + "-" + files[0].originalname);
+    payload.avatar = filePaths.prefixPath;
+  }
+  const user = await User.create(payload);
+  delete user.password;
+  return user;
 };
 
 export const UserSevice = {

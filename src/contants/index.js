@@ -8,5 +8,7 @@ export const DB_NAME = String(process.env.DB_NAME);
 export const DB_DIALECT = String(process.env.DB_DIALECT);
 export const DB_SCHEMA = String(process.env.DB_SCHEMA);
 
+export const APP_DOMAIN = String(process.env.APP_DOMAIN);
+export const DEFAULT_AVATAR = String(process.env.DEFAULT_AVATAR);
 export const LIMIT = 10;
 export const HASH_SALT = 10;

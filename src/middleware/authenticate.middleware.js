@@ -1,6 +1,5 @@
-import jwt from "jsonwebtoken";
 import { User } from "../models";
-import { GenerateToken, VerifyToken } from "../utils/token";
+import { VerifyToken } from "../utils/token";
 import { HttpException } from "./error.middleware";
 
 async function AuthenticatedMiddleware(req, res, next) {

@@ -1,4 +1,3 @@
-import { NextFunction, Request, Response } from "express";
 import chalk from "chalk";
 export class HttpException extends Error {
   status;
@@ -11,7 +10,7 @@ export class HttpException extends Error {
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+// eslint-disable-next-line no-unused-vars
 function ErrorMiddleware(error, req, res, next) {
   const status = error.status || 500;
   const message = error.message || "Something went wrong";

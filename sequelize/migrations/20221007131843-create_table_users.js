@@ -21,6 +21,10 @@ module.exports = {
         password: {
           type: Sequelize.DataTypes.STRING,
         },
+        avatar: {
+          type: Sequelize.DataTypes.STRING,
+          defaultValue: process.env.DEFAULT_AVATAR,
+        },
         created_at: Sequelize.DataTypes.DATEONLY,
         updated_at: Sequelize.DataTypes.DATEONLY,
         deleted_at: Sequelize.DataTypes.DATEONLY,

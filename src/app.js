@@ -8,8 +8,7 @@ import { db } from "./models/index.js";
 import { initialRouter } from "./routes/index.js";
 import ErrorMiddleware from "./middleware/error.middleware.js";
 import compression from "compression";
-import bodyParser from "body-parser";
-
+import multer from "multer";
 config();
 
 db.sequelize
@@ -21,12 +20,14 @@ db.sequelize
     app.use(customMorgan());
     app.use(helmet());
     app.use(cors());
-    app.use(bodyParser.urlencoded({ extended: true }));
-    app.use(bodyParser.json());
+    app.use(express.json());
+    app.use(express.urlencoded({ extended: true }));
+    app.use(multer().array("files"));
+    app.use(express.static("public"));
 
     initialRouter(app);
     app.use(ErrorMiddleware);
 
     app.listen(process.env.APP_PORT, () => console.log("server starting on port::::", process.env.APP_PORT));
   })
-  .catch(() => console.error(chalk.red("Unable to connect to the database:", error)));
+  .catch((error) => console.error(chalk.red("Unable to connect to the database:", error)));

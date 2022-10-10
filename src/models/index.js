@@ -1,11 +1,13 @@
-import { DataTypes, Model, Sequelize } from "sequelize";
+import { DataTypes, Sequelize } from "sequelize";
 import chalk from "chalk";
 import { UserModel } from "./user.model";
 import { PostModel } from "./post.model";
 import { DB_DIALECT, DB_HOST, DB_NAME, DB_PASS, DB_USER } from "../contants";
-const fs = require("fs");
-const path = require("path");
-const basename = path.basename(__filename);
+
+// const path = require("path");
+// const fs = require("fs");
+// const basename = path.basename(__filename);
+
 let db = {};
 
 const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASS, {

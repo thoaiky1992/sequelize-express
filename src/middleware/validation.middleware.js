@@ -1,5 +1,3 @@
-import Joi from "joi";
-
 function ValidationMiddleware(schema) {
   return async (req, res, next) => {
     const validationOptions = {
