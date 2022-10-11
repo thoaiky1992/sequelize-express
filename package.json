@@ -8,7 +8,14 @@
     "build": "npm run clean && babel ./src -d ./build/src",
     "production": "npm run build && node ./build/src/app.js",
     "dev": "nodemon --exec ./node_modules/.bin/babel-node ./src/app.js",
-    "lint": "eslint --fix ./src/**/*.js"
+    "lint": "eslint --fix ./src/**/*.js",
+    "docker:build": "docker build -t sequelize_express .",
+    "docker:run": "docker container run -d  --name sequelize_express  -v \"$(pwd)\"/public:/user/src/app/public --restart on-failure -it -p 4000:4000 --network=app-network sequelize_express",
+    "docker:remove": "docker container rm sequelize_express",
+    "docker:stop": "docker container stop sequelize_express",
+    "docker:start": "docker container start sequelize_express",
+    "docker:restart": "docker container restart sequelize_express",
+    "docker:deploy": "npm run docker:build && npm run docker:stop || true && npm run docker:remove || true && npm run docker:run && docker rmi $(sudo docker images -f \"dangling=true\" -q)"
   },
   "keywords": [],
   "author": "",

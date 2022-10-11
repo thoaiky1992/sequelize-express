@@ -1,6 +1,5 @@
 import { config } from "dotenv";
 config();
-
 export const APP_PORT = Number(process.env.APP_PORT);
 export const DB_HOST = String(process.env.DB_HOST);
 export const DB_USER = String(process.env.DB_USER);
