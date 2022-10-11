@@ -1,5 +1,5 @@
-import { User } from "../models";
-import { VerifyToken } from "../utils/token";
+import { User } from "src/models";
+import { VerifyToken } from "src/utils/token";
 import { HttpException } from "./error.middleware";
 
 async function AuthenticatedMiddleware(req, res, next) {

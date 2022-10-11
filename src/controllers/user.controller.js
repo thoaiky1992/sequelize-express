@@ -1,5 +1,5 @@
-import { HttpException } from "../middleware/error.middleware";
-import { UserSevice } from "../services/user.service";
+import { HttpException } from "src/middleware/error.middleware";
+import { UserSevice } from "src/services/user.service";
 
 const getMany = async (req, res, next) => {
   try {

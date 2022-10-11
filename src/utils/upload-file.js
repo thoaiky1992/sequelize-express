@@ -1,6 +1,6 @@
 import { join } from "path";
 import * as fs from "fs";
-import { APP_DOMAIN } from "../contants";
+import { APP_DOMAIN } from "src/contants";
 
 export const UploadFile = (file, folderPrefix = "files", fileName = "") => {
   fileName = fileName.replace(/ +/g, "-").toLocaleLowerCase();

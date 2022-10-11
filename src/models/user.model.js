@@ -1,6 +1,6 @@
 "use strict";
 
-import { DB_SCHEMA, DEFAULT_AVATAR, HASH_SALT } from "../contants";
+import { DB_SCHEMA, DEFAULT_AVATAR, HASH_SALT } from "src/contants";
 const { Model } = require("sequelize");
 import bcryptjs from "bcryptjs";
 

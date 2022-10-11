@@ -2,7 +2,7 @@ import { DataTypes, Sequelize } from "sequelize";
 import chalk from "chalk";
 import { UserModel } from "./user.model";
 import { PostModel } from "./post.model";
-import { DB_DIALECT, DB_HOST, DB_NAME, DB_PASS, DB_USER } from "../contants";
+import { DB_DIALECT, DB_HOST, DB_NAME, DB_PASS, DB_USER } from "src/contants";
 
 // const path = require("path");
 // const fs = require("fs");

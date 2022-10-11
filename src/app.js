@@ -2,14 +2,13 @@ import express from "express";
 import helmet from "helmet";
 import cors from "cors";
 import chalk from "chalk";
-import { config } from "dotenv";
 import { customMorgan } from "./config/morgan.js";
 import { db } from "./models/index.js";
 import { initialRouter } from "./routes/index.js";
 import ErrorMiddleware from "./middleware/error.middleware.js";
 import compression from "compression";
 import multer from "multer";
-config();
+import { APP_PORT } from "./contants/index.js";
 
 db.sequelize
   .authenticate()
@@ -28,6 +27,6 @@ db.sequelize
     initialRouter(app);
     app.use(ErrorMiddleware);
 
-    app.listen(process.env.APP_PORT, () => console.log("server starting on port::::", process.env.APP_PORT));
+    app.listen(APP_PORT, () => console.log("server starting on port::::", APP_PORT));
   })
   .catch((error) => console.error(chalk.red("Unable to connect to the database:", error)));

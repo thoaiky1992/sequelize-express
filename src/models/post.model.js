@@ -1,6 +1,7 @@
 "use strict";
 
-import { DB_SCHEMA } from "../contants";
+import { DB_SCHEMA } from "src/contants";
+
 const { Model } = require("sequelize");
 
 export const PostModel = (sequelize, DataTypes) => {

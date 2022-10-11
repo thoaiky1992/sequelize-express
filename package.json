@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --watch src --exec babel-node src/app.js",
+    "clean": "rm -rf build && mkdir build",
+    "build": "npm run clean && babel ./src -d ./build/src",
+    "production": "npm run build && node ./build/src/app.js",
+    "dev": "nodemon --exec ./node_modules/.bin/babel-node ./src/app.js",
     "lint": "eslint --fix ./src/**/*.js"
   },
   "keywords": [],
@@ -28,8 +31,14 @@
     "sequelize": "^6.24.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.19.3",
+    "@babel/core": "^7.19.3",
+    "@babel/node": "^7.19.1",
+    "@babel/plugin-transform-runtime": "^7.19.1",
+    "@babel/preset-env": "^7.19.4",
+    "@babel/runtime": "^7.19.4",
     "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
+    "babel-plugin-module-resolver": "^4.1.0",
     "eslint": "^8.25.0"
   }
 }
