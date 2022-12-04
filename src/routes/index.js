@@ -5,5 +5,5 @@ export function initialRouter(app) {
   const router = Router();
   router.use("/users", userRouter);
 
-  app.use(router);
+  app.use("/api/v1/", router);
 }
