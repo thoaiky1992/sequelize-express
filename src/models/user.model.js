@@ -37,6 +37,10 @@ export const UserModel = (sequelize, DataTypes) => {
           this.setDataValue("password", bcryptjs.hashSync(value, HASH_SALT));
         },
       },
+      points: {
+        type: DataTypes.INTEGER,
+        defaultValue: 1,
+      },
     },
     {
       sequelize,

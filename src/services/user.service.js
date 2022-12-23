@@ -1,6 +1,7 @@
 // import { Op, fn } from "sequelize";
+import { Transaction } from "sequelize";
 import { LIMIT } from "src/contants";
-import { Post, User } from "src/models";
+import { db, Post, User } from "src/models";
 import { UploadFile } from "src/utils/upload-file";
 
 // eslint-disable-next-line no-unused-vars
@@ -28,6 +29,31 @@ const createOne = async (req, res) => {
   const user = await User.create(payload);
   delete user.password;
   return user;
+};
+
+const decrementPoint = async () => {
+  // const user = await User.findByPk(1);
+  // if (user.points > 0) await user.decrement("points", { by: 1 });
+
+  // const transaction = await db.sequelize.transaction();
+  // try {
+  //   const user = await User.findByPk(1, { transaction });
+  //   if (user.points > 0) await user.decrement("points", { by: 1, transaction });
+  //   transaction.commit();
+  // } catch (error) {
+  //   await transaction.rollback();
+  //   throw error;
+  // }
+
+  const transaction = await db.sequelize.transaction({ isolationLevel: Transaction.ISOLATION_LEVELS.SERIALIZABLE });
+  try {
+    const user = await User.findByPk(1, { transaction });
+    if (user.points > 0) await user.decrement("points", { by: 1, transaction });
+    transaction.commit();
+  } catch (error) {
+    await transaction.rollback();
+    throw error;
+  }
 };
 
 export const UserSevice = {
